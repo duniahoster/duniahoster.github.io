@@ -3,5 +3,5 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/u3290495/public_html/mandiri
     - /bin/cp index.php $DEPLOYPATH
-    - /bin/cp - R assets $DEPLOYPATH
-    - /bin/cp - R core $DEPLOYPATH
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R core $DEPLOYPATH
