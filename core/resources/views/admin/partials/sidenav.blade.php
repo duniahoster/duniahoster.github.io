@@ -1,12 +1,9 @@
-<div class="sidebar capsule--rounded bg_img overlay--dark"
-     data-background="{{asset('assets/admin/images/sidebar/2.jpg')}}">
+<div class="sidebar capsule--rounded bg_img overlay--dark" data-background="{{asset('assets/admin/images/sidebar/2.jpg')}}">
     <button class="res-sidebar-close-btn"><i class="las la-times"></i></button>
     <div class="sidebar__inner">
         <div class="sidebar__logo">
-            <a href="{{route('admin.dashboard')}}" class="sidebar__main-logo"><img
-                    src="{{getImage(imagePath()['logoIcon']['path'] .'/logo.png')}}" alt="image"></a>
-            <a href="{{route('admin.dashboard')}}" class="sidebar__logo-shape"><img
-                    src="{{getImage(imagePath()['logoIcon']['path'] .'/favicon.png')}}" alt="image"></a>
+            <a href="{{route('admin.dashboard')}}" class="sidebar__main-logo"><img src="{{getImage(imagePath()['logoIcon']['path'] .'/logo.png')}}" alt="image"></a>
+            <a href="{{route('admin.dashboard')}}" class="sidebar__logo-shape"><img src="{{getImage(imagePath()['logoIcon']['path'] .'/favicon.png')}}" alt="image"></a>
             <button type="button" class="navbar__expand"></button>
         </div>
 
@@ -56,9 +53,9 @@
                         <span class="menu-title">@lang('Manage Users')</span>
 
                         @if($banned_users_count > 0 || $email_unverified_users_count > 0 || $sms_unverified_users_count > 0)
-                            <span class="menu-badge pill bg--primary ml-auto">
-                                <i class="fa fa-exclamation"></i>
-                            </span>
+                        <span class="menu-badge pill bg--primary ml-auto">
+                            <i class="fa fa-exclamation"></i>
+                        </span>
                         @endif
                     </a>
                     <div class="sidebar-submenu {{menuActive('admin.users*',2)}} ">
@@ -76,12 +73,21 @@
                                     <span class="menu-title">@lang('Active Users')</span>
                                 </a>
                             </li>
+                            <li class="sidebar-menu-item {{menuActive('admin.users.create')}} ">
+                                <a href="{{route('admin.users.create')}}" class="nav-link">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Create Users')</span>
+                                    @if($create_users_count)
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$create_users_count}}</span>
+                                    @endif
+                                </a>
+                            </li>
                             <li class="sidebar-menu-item {{menuActive('admin.users.banned')}} ">
                                 <a href="{{route('admin.users.banned')}}" class="nav-link">
                                     <i class="menu-icon las la-dot-circle"></i>
                                     <span class="menu-title">@lang('Banned Users')</span>
                                     @if($banned_users_count)
-                                        <span class="menu-badge pill bg--primary ml-auto">{{$banned_users_count}}</span>
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$banned_users_count}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -92,8 +98,7 @@
                                     <span class="menu-title">@lang('Email Unverified')</span>
 
                                     @if($email_unverified_users_count)
-                                        <span
-                                            class="menu-badge pill bg--primary ml-auto">{{$email_unverified_users_count}}</span>
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$email_unverified_users_count}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -103,8 +108,7 @@
                                     <i class="menu-icon las la-dot-circle"></i>
                                     <span class="menu-title">@lang('SMS Unverified')</span>
                                     @if($sms_unverified_users_count)
-                                        <span
-                                            class="menu-badge pill bg--primary ml-auto">{{$sms_unverified_users_count}}</span>
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$sms_unverified_users_count}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -131,11 +135,10 @@
                     <a href="javascript:void(0)" class="{{menuActive('admin.deposit*',3)}}">
                         <i class="menu-icon las la-credit-card"></i>
                         <span class="menu-title">@lang('Deposit System')</span>
-                        @if(0 < $pending_deposits_count)
-                            <span class="menu-badge pill bg--primary ml-auto">
-                                <i class="fa fa-exclamation"></i>
+                        @if(0 < $pending_deposits_count) <span class="menu-badge pill bg--primary ml-auto">
+                            <i class="fa fa-exclamation"></i>
                             </span>
-                        @endif
+                            @endif
                     </a>
                     <div class="sidebar-submenu {{menuActive('admin.deposit*',2)}} ">
                         <ul>
@@ -158,7 +161,7 @@
                                     <i class="menu-icon las la-dot-circle"></i>
                                     <span class="menu-title">@lang('Pending Deposits')</span>
                                     @if($pending_deposits_count)
-                                        <span class="menu-badge pill bg--primary ml-auto">{{$pending_deposits_count}}</span>
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$pending_deposits_count}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -199,11 +202,10 @@
                     <a href="javascript:void(0)" class="{{menuActive('admin.withdraw*',3)}}">
                         <i class="menu-icon la la-bank"></i>
                         <span class="menu-title">@lang('Withdrawals') </span>
-                        @if(0 < $pending_withdraw_count)
-                            <span class="menu-badge pill bg--primary ml-auto">
-                                <i class="fa fa-exclamation"></i>
+                        @if(0 < $pending_withdraw_count) <span class="menu-badge pill bg--primary ml-auto">
+                            <i class="fa fa-exclamation"></i>
                             </span>
-                        @endif
+                            @endif
                     </a>
                     <div class="sidebar-submenu {{menuActive('admin.withdraw*',2)}} ">
                         <ul>
@@ -221,7 +223,7 @@
                                     <span class="menu-title">@lang('Pending Log')</span>
 
                                     @if($pending_withdraw_count)
-                                        <span class="menu-badge pill bg--primary ml-auto">{{$pending_withdraw_count}}</span>
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$pending_withdraw_count}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -256,11 +258,10 @@
                     <a href="javascript:void(0)" class="{{menuActive('admin.ticket*',3)}}">
                         <i class="menu-icon la la-ticket"></i>
                         <span class="menu-title">@lang('Support Ticket') </span>
-                        @if(0 < $pending_ticket_count)
-                            <span class="menu-badge pill bg--primary ml-auto">
-                                <i class="fa fa-exclamation"></i>
+                        @if(0 < $pending_ticket_count) <span class="menu-badge pill bg--primary ml-auto">
+                            <i class="fa fa-exclamation"></i>
                             </span>
-                        @endif
+                            @endif
                     </a>
                     <div class="sidebar-submenu {{menuActive('admin.ticket*',2)}} ">
                         <ul>
@@ -276,8 +277,7 @@
                                     <i class="menu-icon las la-dot-circle"></i>
                                     <span class="menu-title">@lang('Pending Ticket')</span>
                                     @if($pending_ticket_count)
-                                        <span
-                                            class="menu-badge pill bg--primary ml-auto">{{$pending_ticket_count}}</span>
+                                    <span class="menu-badge pill bg--primary ml-auto">{{$pending_ticket_count}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -333,8 +333,7 @@
 
 
                 <li class="sidebar-menu-item  {{menuActive('admin.subscriber.index')}}">
-                    <a href="{{route('admin.subscriber.index')}}" class="nav-link"
-                       data-default-url="{{ route('admin.subscriber.index') }}">
+                    <a href="{{route('admin.subscriber.index')}}" class="nav-link" data-default-url="{{ route('admin.subscriber.index') }}">
                         <i class="menu-icon las la-thumbs-up"></i>
                         <span class="menu-title">@lang('Subscribers') </span>
                     </a>
@@ -342,8 +341,7 @@
 
 
                 <li class="sidebar-menu-item  {{menuActive(['admin.language-manage','admin.language-key'])}}">
-                    <a href="{{route('admin.language-manage')}}" class="nav-link"
-                       data-default-url="{{ route('admin.language-manage') }}">
+                    <a href="{{route('admin.language-manage')}}" class="nav-link" data-default-url="{{ route('admin.language-manage') }}">
                         <i class="menu-icon las la-language"></i>
                         <span class="menu-title">@lang('Language') </span>
                     </a>
@@ -463,17 +461,17 @@
                     <div class="sidebar-submenu {{menuActive('admin.frontend.sections*',2)}} ">
                         <ul>
                             @php
-                                $lastSegment =  collect(request()->segments())->last();
+                            $lastSegment = collect(request()->segments())->last();
                             @endphp
                             @foreach(getPageSections(true) as $k => $secs)
-                                @if($secs['builder'])
-                                    <li class="sidebar-menu-item  @if($lastSegment == $k) active @endif ">
-                                        <a href="{{ route('admin.frontend.sections',$k) }}" class="nav-link">
-                                            <i class="menu-icon las la-dot-circle"></i>
-                                            <span class="menu-title">{{$secs['name']}}</span>
-                                        </a>
-                                    </li>
-                                @endif
+                            @if($secs['builder'])
+                            <li class="sidebar-menu-item  @if($lastSegment == $k) active @endif ">
+                                <a href="{{ route('admin.frontend.sections',$k) }}" class="nav-link">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">{{$secs['name']}}</span>
+                                </a>
+                            </li>
+                            @endif
                             @endforeach
 
 
