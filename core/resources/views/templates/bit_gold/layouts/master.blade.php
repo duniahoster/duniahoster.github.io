@@ -133,7 +133,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 text-md-left text-center">
-              <p>@lang('Copyright © '.date('Y').' <a href="'.route('home').'" class="base--color">'.$general->sitename.'</a>. All rights reserved')</p>
+              <p>@lang('Copyright © <a href="'.route('home').'" class="base--color">'.$general->sitename.'</a> '.date('Y').' <'All rights reserved')</p>
             </div>
             <div class="col-lg-6">
               <ul class="social-link-list d-flex flex-wrap justify-content-md-end justify-content-center">
