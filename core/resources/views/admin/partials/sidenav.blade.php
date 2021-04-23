@@ -82,6 +82,7 @@
                     </a>
 
                 </li>
+
                 <li class="sidebar-menu-item {{menuActive('admin.users.delete')}} ">
                     <a href="{{route('admin.users.delete')}}" class="nav-link">
                         <i class="menu-icon las la-dot-circle"></i>
