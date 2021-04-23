@@ -102,6 +102,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', 'ManageUsersController@allUsers')->name('users.all');
         Route::get('users/create', 'ManageUsersController@createUsers')->name('users.create');
         Route::get('users/active', 'ManageUsersController@activeUsers')->name('users.active');
+        Route::get('users/delete', 'ManageUsersController@deleteUsers')->name('users.delete');
         Route::get('users/banned', 'ManageUsersController@bannedUsers')->name('users.banned');
         Route::get('users/email-unverified', 'ManageUsersController@emailUnverifiedUsers')->name('users.emailUnverified');
         Route::get('users/sms-unverified', 'ManageUsersController@smsUnverifiedUsers')->name('users.smsUnverified');

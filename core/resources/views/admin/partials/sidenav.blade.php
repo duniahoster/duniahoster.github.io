@@ -71,7 +71,7 @@
                 <li class="sidebar-menu-item {{menuActive('admin.users.create')}} ">
                     <a href="{{route('admin.users.create')}}" class="nav-link">
                         <i class="menu-icon las la-dot-circle"></i>
-                        <span class="menu-title">@lang('Create Users')</span>`
+                        <span class="menu-title">@lang('Create User')</span>`
                     </a>
                 </li>
 
@@ -80,6 +80,14 @@
                         <i class="menu-icon las la-dot-circle"></i>
                         <span class="menu-title">@lang('Active Users')</span>
                     </a>
+
+                </li>
+                <li class="sidebar-menu-item {{menuActive('admin.users.delete')}} ">
+                    <a href="{{route('admin.users.delete')}}" class="nav-link">
+                        <i class="menu-icon las la-dot-circle"></i>
+                        <span class="menu-title">@lang('Delete User')</span>`
+                    </a>
+                </li>
 
                 <li class="sidebar-menu-item {{menuActive('admin.users.banned')}} ">
                     <a href="{{route('admin.users.banned')}}" class="nav-link">
