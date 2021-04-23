@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/clear', function(){
+Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 });
 /*
@@ -100,6 +100,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
         // Users Manager
         Route::get('users', 'ManageUsersController@allUsers')->name('users.all');
+        Route::get('users/add', 'ManageUsersController@addUsers')->name('add.users');
         Route::get('users/active', 'ManageUsersController@activeUsers')->name('users.active');
         Route::get('users/banned', 'ManageUsersController@bannedUsers')->name('users.banned');
         Route::get('users/email-unverified', 'ManageUsersController@emailUnverifiedUsers')->name('users.emailUnverified');
@@ -286,8 +287,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::get('manage-section/{id}', 'PageBuilderController@manageSection')->name('manage.section');
             Route::post('manage-section/{id}', 'PageBuilderController@manageSectionUpdate')->name('manage.section.update');
         });
-
-
     });
 });
 
@@ -370,7 +369,6 @@ Route::name('user.')->prefix('user')->group(function () {
 
             Route::get('/plan', 'UserController@plan')->name('plan');
             Route::post('/getCheckoutToken', 'UserController@getCheckoutToken')->name('getCheckoutToken');
-
         });
     });
 });
@@ -402,4 +400,3 @@ Route::get('links/{slug}/{id}', 'SiteController@linkDetails')->name('linkDetails
 
 Route::get('placeholder-image/{size?}', 'SiteController@placeholderImage')->name('placeholderImage');
 Route::get('/{slug}', 'SiteController@pages')->name('pages');
-
