@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\CommissionLog;
@@ -42,6 +43,13 @@ class ManageUsersController extends Controller
         return view('admin.users.list', compact('page_title', 'empty_message', 'users'));
     }
 
+    public function createUsers()
+    {
+        $page_title = 'New New User';
+        $empty_message = 'No user add';
+        return view('admin.users.create', compact('page_title'));
+    }
+
     public function bannedUsers()
     {
         $page_title = 'Banned Users';
@@ -52,10 +60,10 @@ class ManageUsersController extends Controller
 
     public function emailUnverifiedUsers()
     {
-        $page_title = 'Email Unverified Users';
-        $empty_message = 'No email unverified user found';
+        $page_title = 'Delete User';
+        $empty_message = 'No user delete';
         $users = User::emailUnverified()->latest()->paginate(getPaginate());
-        return view('admin.users.list', compact('page_title', 'empty_message', 'users'));
+        return view('admin.users.delete', compact('page_title', 'empty_message', 'users'));
     }
     public function emailVerifiedUsers()
     {
@@ -123,13 +131,13 @@ class ManageUsersController extends Controller
     {
         $page_title = 'User Detail';
         $user = User::findOrFail($id);
-        $totalDeposit = Deposit::where('user_id',$user->id)->where('status',1)->sum('amount');
-        $totalWithdraw = Withdrawal::where('user_id',$user->id)->where('status',1)->sum('amount');
-        $totalTransaction = Transaction::where('user_id',$user->id)->count();
-        $totalInvest = Invest::where('user_id',$user->id)->count();
-        $totalReferral = User::where('ref_by',$user->id)->count();
-        $totalCommission = CommissionLog::where('to_id',$user->id)->sum('commission_amount');
-        return view('admin.users.detail', compact('page_title', 'user','totalDeposit','totalWithdraw','totalTransaction','totalInvest','totalReferral','totalCommission'));
+        $totalDeposit = Deposit::where('user_id', $user->id)->where('status', 1)->sum('amount');
+        $totalWithdraw = Withdrawal::where('user_id', $user->id)->where('status', 1)->sum('amount');
+        $totalTransaction = Transaction::where('user_id', $user->id)->count();
+        $totalInvest = Invest::where('user_id', $user->id)->count();
+        $totalReferral = User::where('ref_by', $user->id)->count();
+        $totalCommission = CommissionLog::where('to_id', $user->id)->sum('commission_amount');
+        return view('admin.users.detail', compact('page_title', 'user', 'totalDeposit', 'totalWithdraw', 'totalTransaction', 'totalInvest', 'totalReferral', 'totalCommission'));
     }
 
 
@@ -181,13 +189,13 @@ class ManageUsersController extends Controller
         $user = User::findOrFail($id);
         $wallet = $request->wallet;
         if ($wallet != "deposit_wallet" && $wallet != 'interest_wallet') {
-            $notify[] = ['error','Opps! Wallet is not valid'];
+            $notify[] = ['error', 'Opps! Wallet is not valid'];
             return back()->withNotify($notify);
         }
 
 
         $amount = getAmount($request->amount);
-        $general = GeneralSetting::first(['cur_text','cur_sym']);
+        $general = GeneralSetting::first(['cur_text', 'cur_sym']);
         $trx = getTrx();
 
         if ($request->act) {
@@ -214,7 +222,6 @@ class ManageUsersController extends Controller
                 'currency' => $general->cur_text,
                 'post_balance' => getAmount($user->$wallet),
             ]);
-
         } else {
             if ($amount > $user->$wallet) {
                 $notify[] = ['error', $user->username . ' has insufficient balance.'];
@@ -223,7 +230,7 @@ class ManageUsersController extends Controller
             $user->$wallet = bcsub($user->$wallet, $amount);
             $user->save();
 
-         
+
 
             $transaction = new Transaction();
             $transaction->user_id = $user->id;
@@ -262,8 +269,8 @@ class ManageUsersController extends Controller
     {
         $user = User::findOrFail($id);
         $page_title = 'User Referrals - ' . $user->username;
-        $referrals = User::where('ref_by',$user->id)->orderBy('id','desc')->paginate(getPaginate());
-        return view('admin.users.referral', compact('page_title', 'user','referrals'));
+        $referrals = User::where('ref_by', $user->id)->orderBy('id', 'desc')->paginate(getPaginate());
+        return view('admin.users.referral', compact('page_title', 'user', 'referrals'));
     }
 
     public function loginHistory(Request $request)
@@ -286,7 +293,7 @@ class ManageUsersController extends Controller
     public function loginIpHistory($ip)
     {
         $page_title = 'Login By - ' . $ip;
-        $login_logs = UserLogin::where('user_ip',$ip)->latest()->paginate(getPaginate());
+        $login_logs = UserLogin::where('user_ip', $ip)->latest()->paginate(getPaginate());
         $empty_message = 'No users login found.';
         return view('admin.users.logins', compact('page_title', 'empty_message', 'login_logs'));
     }
@@ -349,7 +356,7 @@ class ManageUsersController extends Controller
     {
         $user = User::findOrFail($id);
         $page_title = 'User Commission Log: ' . $user->username;
-        $logs = $user->commissions()->where('type','deposit')->with('user','bywho')->paginate(getPaginate());
+        $logs = $user->commissions()->where('type', 'deposit')->with('user', 'bywho')->paginate(getPaginate());
         $empty_message = 'No Data Found!';
         return view('admin.users.commission-log', compact('page_title', 'user', 'logs', 'empty_message'));
     }
@@ -359,7 +366,7 @@ class ManageUsersController extends Controller
     {
         $user = User::findOrFail($id);
         $page_title = 'User Commission Log: ' . $user->username;
-        $logs = $user->commissions()->where('type','invest')->with('user','bywho')->paginate(getPaginate());
+        $logs = $user->commissions()->where('type', 'invest')->with('user', 'bywho')->paginate(getPaginate());
         $empty_message = 'No Data Found!';
         return view('admin.users.commission-log', compact('page_title', 'user', 'logs', 'empty_message'));
     }
@@ -369,7 +376,7 @@ class ManageUsersController extends Controller
     {
         $user = User::findOrFail($id);
         $page_title = 'User Commission Log: ' . $user->username;
-        $logs = $user->commissions()->where('type','interest')->with('user','bywho')->paginate(getPaginate());
+        $logs = $user->commissions()->where('type', 'interest')->with('user', 'bywho')->paginate(getPaginate());
         $empty_message = 'No Data Found!';
         return view('admin.users.commission-log', compact('page_title', 'user', 'logs', 'empty_message'));
     }
@@ -398,7 +405,7 @@ class ManageUsersController extends Controller
         if ($request->search) {
             $search = $request->search;
             $page_title = 'Search User Withdrawals : ' . $user->username;
-            $withdrawals = $user->withdrawals()->where('trx', 'like',"%$search%")->latest()->paginate(getPaginate());
+            $withdrawals = $user->withdrawals()->where('trx', 'like', "%$search%")->latest()->paginate(getPaginate());
             $empty_message = 'No withdrawals';
             return view('admin.withdraw.withdrawals', compact('page_title', 'user', 'search', 'withdrawals', 'empty_message'));
         }
@@ -428,5 +435,4 @@ class ManageUsersController extends Controller
         $notify[] = ['success', 'All users will receive an email shortly.'];
         return back()->withNotify($notify);
     }
-
 }
