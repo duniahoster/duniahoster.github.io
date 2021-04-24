@@ -63,7 +63,7 @@
                 <a href="{{ route('admin.users.login.history.single', $user->id) }}" class="btn btn--primary btn--shadow btn-block btn-lg">
                     @lang('Login Logs')
                 </a>
-                <a href="{{route('admin.users.email.single',$user->id)}}" class="btn btn--danger btn--shadow btn-block btn-lg">
+                <a href="{{route('admin.users.email.single',$user->id)}}" class="btn btn--primary btn--shadow btn-block btn-lg">
                     @lang('Send Email')
                 </a>
                 <a href="{{route('admin.users.email.single',$user->id)}}" class="btn btn--danger btn--shadow btn-block btn-lg">
