@@ -24,21 +24,22 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        
+
         $this->activeTemplate = activeTemplate();
         $this->activeTemplateTrue = activeTemplate(true);
     }
 
-    public function index(){
-        $count = Page::where('tempname',$this->activeTemplate)->where('slug','home')->count();
-        if($count == 0){
+    public function index()
+    {
+        $count = Page::where('tempname', $this->activeTemplate)->where('slug', 'home')->count();
+        if ($count == 0) {
             $in['tempname'] = $this->activeTemplate;
             $in['name'] = 'HOME';
             $in['slug'] = 'home';
             Page::create($in);
         }
         $data['page_title'] = 'Home';
-        $data['sections'] = Page::where('tempname',$this->activeTemplate)->where('slug','home')->firstOrFail();
+        $data['sections'] = Page::where('tempname', $this->activeTemplate)->where('slug', 'home')->firstOrFail();
         return view($this->activeTemplate . 'home', $data);
     }
 
@@ -47,7 +48,7 @@ class SiteController extends Controller
 
     public function pages($slug)
     {
-        $page = Page::where('tempname',activeTemplate())->where('slug',$slug)->firstOrFail();
+        $page = Page::where('tempname', activeTemplate())->where('slug', $slug)->firstOrFail();
         $data['page_title'] = $page->name;
         $data['sections'] = $page;
         return view(activeTemplate() . 'pages', $data);
@@ -123,7 +124,6 @@ class SiteController extends Controller
                     $notify[] = ['error', 'Could not upload your ' . $image];
                     return back()->withNotify($notify)->withInput();
                 }
-
             }
         }
         $notify[] = ['success', 'ticket created successfully!'];
@@ -137,12 +137,12 @@ class SiteController extends Controller
         session()->put('lang', $lang);
         return redirect()->back();
     }
-    
+
     public function blog()
     {
         $blogs = Frontend::where('data_keys', 'blog.element')->latest()->paginate(9);
         $page_title = "blog";
-        return view($this->activeTemplate. 'blog', compact('blogs', 'page_title'));
+        return view($this->activeTemplate . 'blog', compact('blogs', 'page_title'));
     }
 
     public function blogDetails($slug = null, $id, $data_keys = 'blog.element')
@@ -151,35 +151,35 @@ class SiteController extends Controller
         $page_title = "Blog Details";
         $data['title'] = $post->data_values->title;
         $data['details'] = $post->data_values->description;
-        $data['image'] =  asset('assets/images/frontend/blog/'.$post->data_values->image);
-        $blogs = Frontend::where('id','!=', $id)->where('data_keys', $data_keys)->latest()->limit(4)->get();
-        return view($this->activeTemplate . 'blog-details', compact('post', 'data', 'page_title','blogs'));
+        $data['image'] =  asset('assets/images/frontend/blog/' . $post->data_values->image);
+        $blogs = Frontend::where('id', '!=', $id)->where('data_keys', $data_keys)->latest()->limit(4)->get();
+        return view($this->activeTemplate . 'blog-details', compact('post', 'data', 'page_title', 'blogs'));
     }
 
     public function subscribe(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:255|unique:subscribers',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors'=>$validator->errors()->all()]);
+            return response()->json(['errors' => $validator->errors()->all()]);
         }
         Subscriber::create($request->only('email'));
-        return response()->json(['success'=>'Subscribe successfully']);
+        return response()->json(['success' => 'Subscribe successfully']);
     }
 
     public function plan()
     {
-        if(auth()->user()){
+        if (auth()->user()) {
             return redirect()->route('user.plan');
-        }else{
-            $data['extend_blade'] = $this->activeTemplate.'layouts.frontend';
+        } else {
+            $data['extend_blade'] = $this->activeTemplate . 'layouts.frontend';
         }
 
-        $data['page_title'] = "Investment Plan";
+        $data['page_title'] = "Mandiri Plan";
         $data['plans'] = Plan::where('status', 1)->get();
-        $data['planContent'] = getContent('plan.content',true);
+        $data['planContent'] = getContent('plan.content', true);
         return view($this->activeTemplate . 'plan', $data);
     }
 
@@ -190,29 +190,29 @@ class SiteController extends Controller
         // $request->planId = 8;
         // $request->investAmount = 2000;
         if ($request->planId == null) {
-            return response(['errors'=> 'Please Select a Plan!']);
+            return response(['errors' => 'Please Select a Plan!']);
         }
         $requestAmount = $request->investAmount;
         if ($requestAmount == null ||  0 > $requestAmount) {
-            return response(['errors'=> 'Please Enter Invest Amount!']);
+            return response(['errors' => 'Please Enter Invest Amount!']);
         }
         $gnl = GeneralSetting::first();
 
         $plan = Plan::where('id', $request->planId)->where('status', 1)->first();
         if (!$plan) {
-            return response(['errors'=> 'Invalid Plan!']);
+            return response(['errors' => 'Invalid Plan!']);
         }
 
         if ($plan->fixed_amount == '0') {
             if ($requestAmount < $plan->minimum) {
-                return response(['errors'=> 'Minimum Invest ' . getAmount($plan->minimum) . ' ' . $gnl->cur_text]);
+                return response(['errors' => 'Minimum Invest ' . getAmount($plan->minimum) . ' ' . $gnl->cur_text]);
             }
             if ($requestAmount > $plan->maximum) {
-                return response(['errors'=> 'Maximum Invest ' . getAmount($plan->maximum) . ' ' . $gnl->cur_text]);
+                return response(['errors' => 'Maximum Invest ' . getAmount($plan->maximum) . ' ' . $gnl->cur_text]);
             }
         } else {
             if ($requestAmount != $plan->fixed_amount) {
-                return response(['errors'=> 'Fixed Invest amount ' . getAmount($plan->fixed_amount) . ' ' . $gnl->cur_text]);
+                return response(['errors' => 'Fixed Invest amount ' . getAmount($plan->fixed_amount) . ' ' . $gnl->cur_text]);
             }
         }
         //start
@@ -227,44 +227,45 @@ class SiteController extends Controller
 
 
 
-        if($plan->lifetime_status == 0){
+        if ($plan->lifetime_status == 0) {
             $ret = $plan->repeat_time;
-            $total = ($interest_amount*$plan->repeat_time).' '.$gnl->cur_text;
-            $totalMoney = $interest_amount*$plan->repeat_time;
+            $total = ($interest_amount * $plan->repeat_time) . ' ' . $gnl->cur_text;
+            $totalMoney = $interest_amount * $plan->repeat_time;
 
-            if($plan->capital_back_status == 1){
+            if ($plan->capital_back_status == 1) {
                 $total .= '+Capital';
                 $totalMoney += $request->investAmount;
             }
 
 
-        $result['description'] = 'Return '.$interest_amount.' '.$gnl->cur_text.' Every '.$time_name->name.' For '.$ret.' '.$time_name->name.'. Total '.$total;
-        $result['totalMoney'] = $totalMoney;
-        $result['netProfit'] = $totalMoney-$request->investAmount;
-
-        }else{
-        $result['description'] = 'Return '.$interest_amount.' '.$gnl->cur_text.' Every '.$time_name->name.' For Lifetime';
+            $result['description'] = 'Return ' . $interest_amount . ' ' . $gnl->cur_text . ' Every ' . $time_name->name . ' For ' . $ret . ' ' . $time_name->name . '. Total ' . $total;
+            $result['totalMoney'] = $totalMoney;
+            $result['netProfit'] = $totalMoney - $request->investAmount;
+        } else {
+            $result['description'] = 'Return ' . $interest_amount . ' ' . $gnl->cur_text . ' Every ' . $time_name->name . ' For Lifetime';
         }
-        
+
         return response($result);
         //end
     }
 
-    public function linkDetails($slug,$id){
+    public function linkDetails($slug, $id)
+    {
 
         $gnl = GeneralSetting::first();
-        $item = Frontend::where('id',$id)->where('data_keys','links.element')->firstOrFail();
+        $item = Frontend::where('id', $id)->where('data_keys', 'links.element')->firstOrFail();
         $page_title = html_entity_decode($item->data_values->title);
-        return view($this->activeTemplate.'linkDetails',compact('page_title','item'));
+        return view($this->activeTemplate . 'linkDetails', compact('page_title', 'item'));
     }
 
-    public function placeholderImage($size = null){
+    public function placeholderImage($size = null)
+    {
         if ($size != 'undefined') {
             $size = $size;
-            $imgWidth = explode('x',$size)[0];
-            $imgHeight = explode('x',$size)[1];
+            $imgWidth = explode('x', $size)[0];
+            $imgHeight = explode('x', $size)[1];
             $text = $imgWidth . '×' . $imgHeight;
-        }else{
+        } else {
             $imgWidth = 150;
             $imgHeight = 150;
             $text = 'Undefined Size';
@@ -274,7 +275,7 @@ class SiteController extends Controller
         if ($fontSize <= 9) {
             $fontSize = 9;
         }
-        if($imgHeight < 100 && $fontSize > 30){
+        if ($imgHeight < 100 && $fontSize > 30) {
             $fontSize = 30;
         }
 
@@ -292,6 +293,4 @@ class SiteController extends Controller
         imagejpeg($image);
         imagedestroy($image);
     }
-
-
 }
