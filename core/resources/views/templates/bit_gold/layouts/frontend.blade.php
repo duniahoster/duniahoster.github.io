@@ -59,7 +59,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav main-menu ml-auto">
                 <li> <a href="{{route('home')}}">@lang('Home')</a></li>
-                <li> <a href="{{route('home')}}">@lang('About')</a></li>
                 <li><a href="{{route('plan')}}">@lang('Mandiri Plan')</a></li>
                 @foreach($pages as $k => $data)
                 <li><a href="{{route('pages',[$data->slug])}}">{{__($data->name)}}</a></li>
