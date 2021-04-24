@@ -190,7 +190,7 @@ class SiteController extends Controller
         // $request->planId = 8;
         // $request->investAmount = 2000;
         if ($request->planId == null) {
-            return response(['errors' => 'Please Select a Plan!']);
+            return response(['errors' => 'Silakan Pilih Plan!']);
         }
         $requestAmount = $request->investAmount;
         if ($requestAmount == null ||  0 > $requestAmount) {
