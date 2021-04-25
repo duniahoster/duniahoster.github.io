@@ -21,7 +21,7 @@ class ManageUsersController extends Controller
 {
     public function createUser()
     {
-        return view('tambah data',);
+        return view('admin.users.create',);
     }
 
     public function storeUsers(Request $request)
@@ -35,7 +35,7 @@ class ManageUsersController extends Controller
             'address' => 'required'
         ]);
         User::create($request->all());
-        return redirect('/users')->with('status', 'User Added Successfully!');
+        return redirect('admin.users.list')->with('status', 'User Added Successfully!');
     }
 
     public function allUsers()
