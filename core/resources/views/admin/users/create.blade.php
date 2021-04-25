@@ -9,14 +9,14 @@
             <div class="card-body">
                 <h5 class="card-title mb-50 border-bottom pb-2">Add New User</h5>
 
-                <form action="admin.users.create" method="POST">
+                <form action="admin.users" method="POST">
                     @csrf
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group ">
                                 <label for="username" class="form-control-label font-weight-bold">Username<span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" id="username" name="username" placeholder="Username">
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Username"> @error('username') <div class="invalid-feedback">{{ $message }} </div> @enderror
                             </div>
                         </div>
 
