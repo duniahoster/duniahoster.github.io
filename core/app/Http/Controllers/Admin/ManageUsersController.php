@@ -21,9 +21,7 @@ class ManageUsersController extends Controller
 {
     public function createUser()
     {
-        $page_title = 'Create User';
-        $empty_message = 'No user added';
-        return view('admin.users.create',);
+        return view('tambah data',);
     }
 
     public function storeUsers(Request $request)
