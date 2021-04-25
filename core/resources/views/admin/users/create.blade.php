@@ -90,15 +90,14 @@
                             </div>
                         </div>
 
-                        <div class="row mt-4">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn--primary btn-block btn-lg">@lang('Add User Now')
-                                    </button>
-                                </div>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn--primary btn-block btn-lg">@lang('Add User Now')
+                                </button>
                             </div>
-
                         </div>
+
+                    </div>
                 </form>
             </div>
         </div>
