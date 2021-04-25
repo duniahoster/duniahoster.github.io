@@ -55,52 +55,50 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <label for="address" class="form-control-label font-weight-bold">Address<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="address" name="address" placeholder="Nama jalan, Desa, RT/RW">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group ">
+                                <label for="city" class="form-control-label font-weight-bold">City<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="city" name="city" placeholder="City">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group ">
+                                <label for="state" class="form-control-label font-weight-bold">State<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="state" name="state" placeholder="State">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group ">
+                                <label for="zip" class="form-control-label font-weight-bold">Zip/Postal<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="zip" name="zip" placeholder="Zip/Postal">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group ">
+                                <label class="form-control-label font-weight-bold">@lang('Country') </label>
+                                <select name="country" class="form-control"> @include('partials.country') </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
                             <div class="col-md-12">
-                                <div class="form-group ">
-                                    <label for="address" class="form-control-label font-weight-bold">Address<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" id="address" name="address" placeholder="Nama jalan, Desa, RT/RW">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn--primary btn-block btn-lg">@lang('Add User Now')
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="form-group ">
-                                    <label for="city" class="form-control-label font-weight-bold">City<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" id="city" name="city" placeholder="City">
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="form-group ">
-                                    <label for="state" class="form-control-label font-weight-bold">State<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" id="state" name="state" placeholder="State">
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="form-group ">
-                                    <label for="zip" class="form-control-label font-weight-bold">Zip/Postal<span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" id="zip" name="zip" placeholder="Zip/Postal">
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="form-group ">
-                                    <label class="form-control-label font-weight-bold">@lang('Country') </label>
-                                    <select name="country" class="form-control"> @include('partials.country') </select>
-                                </div>
-                            </div>
-
-
-                            <div class="row mt-4">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn--primary btn-block btn-lg">@lang('Save Changes')
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
+                        </div>
                 </form>
             </div>
         </div>
