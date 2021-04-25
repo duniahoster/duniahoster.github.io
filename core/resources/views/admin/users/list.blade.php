@@ -31,19 +31,11 @@
                                 <td data-label="@lang('Email')">{{ $user->email }}</td>
                                 <td data-label="@lang('Phone')">{{ $user->mobile }}</td>
                                 <td data-label="@lang('Joined At')">{{ showDateTime($user->created_at) }}</td>
-                                <td data-label="Action">
-                                    <a href="{{ route('admin.withdraw.method.edit', $method->id)}}" class="icon-btn ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Edit')"><i class="las la-pen"></i></a>
-
-
-                                    @if($method->status == 1)
-                                    <a href="javascript:void(0)" class="icon-btn btn--danger deactivateBtn  ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Disable')" data-id="{{ $method->id }}" data-name="{{ $method->name }}">
-                                        <i class="la la-eye-slash"></i>
+                                <td data-label="@lang('Action')">
+                                    <a href="{{ route('admin.user.edit', $method->id)}}" class="icon-btn ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Edit')"><i class="las la-pen"></i></a>
+                                    <a href="{{ route('admin.users.detail', $method->id) }}" class="icon-btn" data-toggle="tooltip" title="" data-original-title="Delete">
+                                        <i class="las la-eye-slash"></i>
                                     </a>
-                                    @else
-                                    <a href="javascript:void(0)" class="icon-btn btn--success activateBtn  ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Enable')" data-id="{{ $method->id }}" data-name="{{ $method->name }}">
-                                        <i class="la la-eye"></i>
-                                    </a>
-                                    @endif
                                 </td>
                             </tr>
                             @empty
