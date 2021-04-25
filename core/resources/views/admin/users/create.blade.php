@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title mb-50 border-bottom pb-2">Add New User</h5>
 
-                <form action="admin.users.create" method="POST">
+                <form action="admin.users.store" method="POST">
                     @csrf
 
                     <div class="row">
