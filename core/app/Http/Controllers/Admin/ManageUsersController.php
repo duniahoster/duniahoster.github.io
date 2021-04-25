@@ -35,7 +35,10 @@ class ManageUsersController extends Controller
             'lastname' => 'required',
             'email' => 'required|email|unique',
             'mobile' => 'required|numeric',
-            'address' => 'required'
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip/postal' => 'required|size 5'
         ]);
         User::create($request->all());
         return redirect('admin.users.list')->with('status', 'User Added Successfully!');
