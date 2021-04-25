@@ -3,11 +3,14 @@
 @section('panel')
 <div class <div class="row">
 
+    <a href="users/create"></a>
+
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
     @endif
+
     <div class="col-lg-12">
         <div class="card b-radius--10 ">
             <div class="card-body p-0">
