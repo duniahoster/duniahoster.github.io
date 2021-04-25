@@ -34,7 +34,7 @@ class ManageUsersController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|numeric|unique',
             'address' => 'required',
             'city' => 'required',
             'state' => 'required',
