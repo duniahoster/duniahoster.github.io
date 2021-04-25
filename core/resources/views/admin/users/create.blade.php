@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title mb-50 border-bottom pb-2">Add New User</h5>
 
-                <form action="admin.users.store" method="POST">
+                <form action="create" method="POST">
                     @csrf
 
                     <div class="row">
@@ -92,7 +92,7 @@
 
                         <div class="d-grid gap-2 col-3 mt-4 ml-auto mr-auto">
                             <div class="form-group">
-                                <button type="submit" class="btn btn--primary btn-block btn-lg">@lang('Add User Now')
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">@lang('Add User Now')
                                 </button>
                             </div>
                         </div>
