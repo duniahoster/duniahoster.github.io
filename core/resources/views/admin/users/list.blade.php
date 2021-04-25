@@ -12,7 +12,7 @@
     @endif
 
     <div class="col-lg-12">
-        <div class="card b-radius--10 ">
+        <div class="card b-radius--5 ">
             <div class="card-body p-0">
                 <div class="table-responsive--md  table-responsive">
                     <table class="table table--light style--two">
@@ -40,6 +40,8 @@
                                 <td data-label="@lang('Phone')">{{ $user->mobile }}</td>
                                 <td data-label="@lang('Joined At')">{{ showDateTime($user->created_at) }}</td>
                                 <td data-label="@lang('Action')">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                     <a href="{{ route('admin.users.detail', $user->id) }}" class="icon-btn" data-toggle="tooltip" title="" data-original-title="Details">
                                         <i class="las la-desktop text--shadow"></i>
                                     </a>
