@@ -1,11 +1,11 @@
 @extends('admin.layouts.app')
 
 @section('panel')
-<div class="row mb-none-30">
 
-    <div class="col-xl-9 col-lg-7 col-md-7 mb-30">
+<div class="row">
 
-        <div class="card mt-50">
+    <div class="col-lg-12">
+        <div class="card">
             <div class="card-body">
                 <h5 class="card-title mb-50 border-bottom pb-2">Add New User</h5>
 
