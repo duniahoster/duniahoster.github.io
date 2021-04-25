@@ -3,14 +3,6 @@
 @section('panel')
 <div class <div class="row">
 
-    <a href="users/create"></a>
-
-    @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-    @endif
-
     <div class="col-lg-12">
         <div class="card b-radius--5 ">
             <div class="card-body p-0">
@@ -39,12 +31,19 @@
                                 <td data-label="@lang('Email')">{{ $user->email }}</td>
                                 <td data-label="@lang('Phone')">{{ $user->mobile }}</td>
                                 <td data-label="@lang('Joined At')">{{ showDateTime($user->created_at) }}</td>
-                                <td data-label="@lang('Action')">
-                                    <button type="submit" class="btn btn-primary">Edit</button>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    <a href="{{ route('admin.users.detail', $user->id) }}" class="icon-btn" data-toggle="tooltip" title="" data-original-title="Details">
-                                        <i class="las la-desktop text--shadow"></i>
+                                <td data-label="Action">
+                                    <a href="{{ route('admin.withdraw.method.edit', $method->id)}}" class="icon-btn ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Edit')"><i class="las la-pen"></i></a>
+
+
+                                    @if($method->status == 1)
+                                    <a href="javascript:void(0)" class="icon-btn btn--danger deactivateBtn  ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Disable')" data-id="{{ $method->id }}" data-name="{{ $method->name }}">
+                                        <i class="la la-eye-slash"></i>
                                     </a>
+                                    @else
+                                    <a href="javascript:void(0)" class="icon-btn btn--success activateBtn  ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Enable')" data-id="{{ $method->id }}" data-name="{{ $method->name }}">
+                                        <i class="la la-eye"></i>
+                                    </a>
+                                    @endif
                                 </td>
                             </tr>
                             @empty
@@ -67,7 +66,19 @@
 </div>
 @endsection
 
+@push('breadcrumb-plugins')
+<a href="users/create"></a>
 
+@if (session('status'))
+<div class="alert alert-success">
+    {{ session('status') }}
+</div>
+@endif
+@endpush
+
+@push('breadcrumb-plugins')
+<a class="btn btn-sm btn--primary box--shadow1 text--small" href="{{ route('admin.users.create') }}"><i class="fa fa-fw fa-plus"></i>Add New</a>
+@endpush
 
 @push('breadcrumb-plugins')
 <form action="{{ route('admin.users.search', $scope ?? str_replace('admin.users.', '', request()->route()->getName())) }}" method="GET" class="form-inline float-sm-right bg--white">
