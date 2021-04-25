@@ -26,7 +26,7 @@ class ManageUsersController extends Controller
         return view('admin.users.create',);
     }
 
-    public function store(Request $request)
+    public function storeUsers(Request $request)
     {
         $request->validate([
             'username' => 'required|unique',
