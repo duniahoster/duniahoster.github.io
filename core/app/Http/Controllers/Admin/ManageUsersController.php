@@ -29,19 +29,7 @@ class ManageUsersController extends Controller
 
     public function storeUsers(Request $request)
     {
-        $request->validate([
-            'username' => 'required|unique',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email|unique',
-            'mobile' => 'required|numeric|unique',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip/postal' => 'required'
-        ]);
-        User::create($request->all());
-        return redirect('admin.users.list')->with('status', 'User Added Successfully!');
+        <h1>Coba tampilan</h1>
     }
 
     public function allUsers()
