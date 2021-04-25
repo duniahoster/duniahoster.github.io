@@ -90,7 +90,7 @@
                             </div>
                         </div>
 
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 col-4 my-4">
                             <div class="form-group">
                                 <button type="submit" class="btn btn--primary btn-block btn-lg">@lang('Add User Now')
                                 </button>
