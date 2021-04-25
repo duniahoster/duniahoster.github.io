@@ -1,15 +1,19 @@
 @extends('admin.layouts.app')
 
 @section('panel')
+<div class <div class="row">
 
-    <div class="row">
-
-        <div class="col-lg-12">
-            <div class="card b-radius--10 ">
-                <div class="card-body p-0">
-                    <div class="table-responsive--md  table-responsive">
-                        <table class="table table--light style--two">
-                            <thead>
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
+    <div class="col-lg-12">
+        <div class="card b-radius--10 ">
+            <div class="card-body p-0">
+                <div class="table-responsive--md  table-responsive">
+                    <table class="table table--light style--two">
+                        <thead>
                             <tr>
                                 <th scope="col">@lang('User')</th>
                                 <th scope="col">@lang('Username')</th>
@@ -18,8 +22,8 @@
                                 <th scope="col">@lang('Joined At')</th>
                                 <th scope="col">@lang('Action')</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             @forelse($users as $user)
                             <tr>
                                 <td data-label="@lang('User')">
@@ -39,34 +43,34 @@
                                 </td>
                             </tr>
                             @empty
-                                <tr>
-                                    <td class="text-muted text-center" colspan="100%">{{ trans($empty_message) }}</td>
-                                </tr>
+                            <tr>
+                                <td class="text-muted text-center" colspan="100%">{{ trans($empty_message) }}</td>
+                            </tr>
                             @endforelse
 
-                            </tbody>
-                        </table><!-- table end -->
-                    </div>
+                        </tbody>
+                    </table><!-- table end -->
                 </div>
-                <div class="card-footer py-4">
-                    {{ $users->links('admin.partials.paginate') }}
-                </div>
-            </div><!-- card end -->
-        </div>
-
-
+            </div>
+            <div class="card-footer py-4">
+                {{ $users->links('admin.partials.paginate') }}
+            </div>
+        </div><!-- card end -->
     </div>
+
+
+</div>
 @endsection
 
 
 
 @push('breadcrumb-plugins')
-    <form action="{{ route('admin.users.search', $scope ?? str_replace('admin.users.', '', request()->route()->getName())) }}" method="GET" class="form-inline float-sm-right bg--white">
-        <div class="input-group has_append">
-            <input type="text" name="search" class="form-control" placeholder="@lang('Username or email')" value="{{ $search ?? '' }}">
-            <div class="input-group-append">
-                <button class="btn btn--primary" type="submit"><i class="fa fa-search"></i></button>
-            </div>
+<form action="{{ route('admin.users.search', $scope ?? str_replace('admin.users.', '', request()->route()->getName())) }}" method="GET" class="form-inline float-sm-right bg--white">
+    <div class="input-group has_append">
+        <input type="text" name="search" class="form-control" placeholder="@lang('Username or email')" value="{{ $search ?? '' }}">
+        <div class="input-group-append">
+            <button class="btn btn--primary" type="submit"><i class="fa fa-search"></i></button>
         </div>
-    </form>
+    </div>
+</form>
 @endpush

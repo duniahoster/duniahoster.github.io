@@ -19,18 +19,33 @@ use App\Http\Controllers\Controller;
 
 class ManageUsersController extends Controller
 {
+    public function createUser()
+    {
+        $page_title = 'Create User';
+        $empty_message = 'No user added';
+        return view('admin.users.create',);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|unique',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique',
+            'mobile' => 'required|numeric',
+            'address' => 'required'
+        ]);
+        User::create($request->all());
+        return redirect('/users')->with('status', 'User Added Successfully!');
+    }
+
     public function allUsers()
     {
         $page_title = 'Manage Users';
         $empty_message = 'No user found';
         $users = User::latest()->paginate(getPaginate());
         return view('admin.users.list', compact('page_title', 'empty_message', 'users'));
-    }
-
-    public function createUsers()
-    {
-        $page_title = 'Create Users';
-        $empty_message = 'No user added';
     }
 
     public function activeUsers()
