@@ -32,9 +32,10 @@
                                 <td data-label="@lang('Phone')">{{ $user->mobile }}</td>
                                 <td data-label="@lang('Joined At')">{{ showDateTime($user->created_at) }}</td>
                                 <td data-label="@lang('Action')">
-                                    <a href="{{ route('admin.user.edit', $method->id)}}" class="icon-btn ml-1" data-toggle="tooltip" title="" data-original-title="@lang('Edit')"><i class="las la-pen"></i></a>
-                                    <a href="{{ route('admin.users.detail', $method->id) }}" class="icon-btn" data-toggle="tooltip" title="" data-original-title="Delete">
-                                        <i class="las la-eye-slash"></i>
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <a href="{{ route('admin.users.detail', $user->id) }}" class="icon-btn" data-toggle="tooltip" title="" data-original-title="Details">
+                                        <i class="las la-desktop text--shadow"></i>
                                     </a>
                                 </td>
                             </tr>
