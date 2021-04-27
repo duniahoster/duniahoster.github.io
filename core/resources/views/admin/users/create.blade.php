@@ -9,7 +9,8 @@
             <div class="card-body">
                 <h5 class="card-title mb-50 border-bottom pb-2">Add New User</h5>
 
-                <form method="POST" action="create">
+                <!-- <form method="POST" action="create"> -->
+                <form method="POST" action="{{ route('admin.store.method.store') }}">
                     @csrf
 
                     <div class="row">
