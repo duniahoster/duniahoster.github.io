@@ -21,7 +21,7 @@ class ManageUsersController extends Controller
 {
     public function createUser()
     {
-        $page_title = 'Create User';
+        $page_title = 'Add New User';
         $empty_message = 'No user Added';
         $users = User::latest()->paginate(getPaginate());
         return view('admin.users.create', compact('page_title', 'empty_message', 'users'));
