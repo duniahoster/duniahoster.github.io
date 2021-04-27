@@ -41,7 +41,8 @@ class ManageUsersController extends Controller
             'zip/postal' => 'required'
         ]);
         User::create($request->all());
-        return redirect('admin.users')->with('status', 'User Added Successfully!');
+        return redirect('admin')->with('status', 'User Added Successfully!');
+        // return redirect('admin.users')->with('status', 'User Added Successfully!');
     }
 
     public function allUsers()
